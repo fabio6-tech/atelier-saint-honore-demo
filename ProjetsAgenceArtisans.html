@@ -1,0 +1,721 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!-- =====================================================
+     ZONES À PERSONNALISER (CTRL+F pour trouver rapidement)
+     [NOM_ATELIER]    → Nom de l'atelier
+     [METIER]         → Ex: Tapissier-décorateur
+     [VILLE]          → Ex: Lyon
+     [ACCROCHE]       → Phrase d'accroche
+     [ANNEE]          → Ex: 1998
+     [TELEPHONE]      → Ex: 04 78 XX XX XX
+     [EMAIL]          → Ex: contact@atelier.fr
+     [ADRESSE]        → Adresse complète
+     [FORMSPREE_ID]   → Remplacer dans action="..."
+     [PHOTO_X]        → URLs des photos
+     ===================================================== -->
+
+<title>[NOM_ATELIER] — [METIER] à [VILLE]</title>
+<meta name="description" content="[NOM_ATELIER], [METIER] à [VILLE] depuis [ANNEE]. Savoir-faire artisanal, restauration et création sur mesure.">
+
+<!-- Google Fonts : Fraunces (display serif) + Manrope (body sans) -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,400&family=Manrope:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+:root{
+  /* ========== PALETTE (modifier ici pour changer le style global) ========== */
+  --cream:        #F5F1EA;   /* fond principal ivoire chaud */
+  --cream-deep:  #ECE5D8;   /* fond secondaire */
+  --ink:         #1A1613;   /* texte principal, noir chaud */
+  --ink-soft:    #4A423D;   /* texte secondaire */
+  --wine:        #7A1E2B;   /* accent principal bordeaux */
+  --wine-deep:   #5C1620;   /* bordeaux profond hover */
+  --gold:        #B8935A;   /* doré patiné, détails */
+  --line:        #D4CCB8;   /* filet, bordures */
+
+  /* ========== TYPO ========== */
+  --display: "Fraunces", Georgia, serif;
+  --body: "Manrope", -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+
+body{
+  font-family:var(--body);
+  color:var(--ink);
+  background:var(--cream);
+  line-height:1.6;
+  font-weight:400;
+  overflow-x:hidden;
+}
+
+/* ========== TYPO GÉNÉRALE ========== */
+h1,h2,h3,h4{
+  font-family:var(--display);
+  font-weight:400;
+  line-height:1.1;
+  letter-spacing:-0.02em;
+  color:var(--ink);
+}
+
+h1{font-size:clamp(2.5rem, 6vw, 5.5rem)}
+h2{font-size:clamp(2rem, 4vw, 3.5rem);margin-bottom:1.5rem}
+h3{font-size:1.5rem;margin-bottom:0.75rem}
+
+p{color:var(--ink-soft);margin-bottom:1rem}
+
+a{color:inherit;text-decoration:none}
+
+.italic{font-style:italic;font-variation-settings:"opsz" 144}
+
+/* ========== NAVIGATION ========== */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:100;
+  padding:1.5rem 3rem;
+  display:flex;justify-content:space-between;align-items:center;
+  background:rgba(245,241,234,0.92);
+  backdrop-filter:blur(12px);
+  border-bottom:1px solid transparent;
+  transition:border-color 0.3s ease;
+}
+nav.scrolled{border-bottom-color:var(--line)}
+
+.brand{
+  font-family:var(--display);
+  font-size:1.35rem;
+  letter-spacing:-0.01em;
+  font-weight:500;
+}
+.brand .italic{color:var(--wine)}
+
+.nav-links{display:flex;gap:2.5rem;list-style:none}
+.nav-links a{
+  font-size:0.85rem;
+  letter-spacing:0.08em;
+  text-transform:uppercase;
+  font-weight:500;
+  color:var(--ink-soft);
+  transition:color 0.2s;
+  position:relative;
+}
+.nav-links a:hover{color:var(--wine)}
+.nav-links a::after{
+  content:"";position:absolute;bottom:-4px;left:0;
+  width:0;height:1px;background:var(--wine);
+  transition:width 0.3s ease;
+}
+.nav-links a:hover::after{width:100%}
+
+.burger{display:none;flex-direction:column;gap:5px;cursor:pointer;background:none;border:none}
+.burger span{width:24px;height:1.5px;background:var(--ink);transition:0.3s}
+
+/* ========== HERO ========== */
+.hero{
+  min-height:100vh;
+  padding:8rem 3rem 4rem;
+  display:grid;
+  grid-template-columns:1.1fr 1fr;
+  gap:4rem;
+  align-items:center;
+  position:relative;
+}
+
+.hero::before{
+  content:"";position:absolute;
+  top:15%;right:-5%;
+  width:500px;height:500px;
+  background:radial-gradient(circle, rgba(184,147,90,0.12), transparent 70%);
+  z-index:0;
+  pointer-events:none;
+}
+
+.hero-content{position:relative;z-index:2;animation:fadeUp 1s ease-out}
+.hero-tag{
+  display:inline-flex;align-items:center;gap:0.75rem;
+  font-size:0.8rem;letter-spacing:0.15em;text-transform:uppercase;
+  color:var(--wine);font-weight:600;
+  margin-bottom:1.5rem;
+}
+.hero-tag::before{content:"";width:30px;height:1px;background:var(--wine)}
+
+.hero h1{margin-bottom:1.75rem}
+.hero h1 .italic{color:var(--wine)}
+
+.hero-desc{
+  font-size:1.15rem;max-width:480px;
+  color:var(--ink-soft);margin-bottom:2.5rem;
+  line-height:1.7;
+}
+
+.hero-cta{display:flex;gap:1.25rem;flex-wrap:wrap}
+
+.btn{
+  display:inline-flex;align-items:center;gap:0.6rem;
+  padding:1rem 2rem;
+  font-family:var(--body);font-size:0.9rem;font-weight:600;
+  letter-spacing:0.05em;
+  border-radius:2px;
+  transition:all 0.3s ease;
+  cursor:pointer;border:none;
+}
+.btn-primary{background:var(--wine);color:var(--cream)}
+.btn-primary:hover{background:var(--wine-deep);transform:translateY(-2px);box-shadow:0 12px 28px rgba(122,30,43,0.25)}
+.btn-secondary{background:transparent;color:var(--ink);border:1px solid var(--ink)}
+.btn-secondary:hover{background:var(--ink);color:var(--cream)}
+
+.hero-visual{
+  position:relative;z-index:1;
+  aspect-ratio:4/5;
+  animation:fadeIn 1.4s ease-out 0.2s both;
+}
+.hero-visual img{
+  width:100%;height:100%;object-fit:cover;
+  filter:grayscale(0.15) contrast(1.05);
+  border-radius:2px;
+}
+.hero-visual::after{
+  content:"";position:absolute;
+  top:-20px;left:-20px;right:20px;bottom:20px;
+  border:1px solid var(--gold);
+  z-index:-1;border-radius:2px;
+}
+
+.hero-meta{
+  position:absolute;bottom:4rem;left:3rem;
+  display:flex;gap:3rem;
+  font-size:0.8rem;letter-spacing:0.1em;text-transform:uppercase;
+  color:var(--ink-soft);
+}
+.hero-meta span strong{
+  display:block;font-family:var(--display);
+  font-size:2rem;color:var(--wine);font-weight:500;
+  letter-spacing:-0.02em;text-transform:none;
+  margin-bottom:0.2rem;
+}
+
+/* ========== SECTIONS COMMUNES ========== */
+section{padding:7rem 3rem;position:relative}
+
+.section-label{
+  display:inline-block;
+  font-size:0.75rem;letter-spacing:0.2em;text-transform:uppercase;
+  color:var(--wine);font-weight:600;
+  margin-bottom:1.25rem;
+}
+
+.container{max-width:1280px;margin:0 auto}
+
+/* ========== ABOUT ========== */
+.about{background:var(--cream-deep)}
+.about-grid{
+  display:grid;grid-template-columns:1fr 1.2fr;
+  gap:5rem;align-items:center;
+}
+.about-image{
+  aspect-ratio:3/4;position:relative;
+}
+.about-image img{
+  width:100%;height:100%;object-fit:cover;
+  filter:grayscale(0.1);border-radius:2px;
+}
+.about-image::before{
+  content:"";position:absolute;
+  top:30px;left:-30px;
+  width:80px;height:80px;
+  border-left:1px solid var(--gold);
+  border-top:1px solid var(--gold);
+}
+.about-image::after{
+  content:"";position:absolute;
+  bottom:30px;right:-30px;
+  width:80px;height:80px;
+  border-right:1px solid var(--gold);
+  border-bottom:1px solid var(--gold);
+}
+
+.about-text h2 .italic{color:var(--wine);display:block}
+.about-text p{font-size:1.05rem;margin-bottom:1.25rem}
+.about-signature{
+  font-family:var(--display);font-style:italic;
+  font-size:1.5rem;color:var(--wine);
+  margin-top:2rem;
+}
+
+/* ========== SAVOIR-FAIRE (services) ========== */
+.savoir{text-align:center}
+.savoir .section-label{color:var(--wine)}
+.savoir h2{max-width:750px;margin:0 auto 4rem}
+.savoir h2 .italic{color:var(--wine)}
+
+.services-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+  gap:2rem;text-align:left;
+}
+.service{
+  padding:2.5rem 2rem;
+  background:var(--cream-deep);
+  border-radius:2px;
+  transition:all 0.4s ease;
+  position:relative;
+  overflow:hidden;
+}
+.service::before{
+  content:"";position:absolute;
+  top:0;left:0;right:0;height:2px;
+  background:var(--gold);
+  transform:scaleX(0);transform-origin:left;
+  transition:transform 0.4s ease;
+}
+.service:hover{transform:translateY(-6px);box-shadow:0 20px 40px rgba(26,22,19,0.08)}
+.service:hover::before{transform:scaleX(1)}
+
+.service-num{
+  font-family:var(--display);font-style:italic;
+  font-size:2rem;color:var(--wine);
+  margin-bottom:1rem;font-weight:400;
+}
+.service h3{font-weight:500}
+.service p{font-size:0.95rem;margin-bottom:0}
+
+/* ========== RÉALISATIONS (portfolio) ========== */
+.realisations{background:var(--ink);color:var(--cream);padding:8rem 3rem}
+.realisations .section-label{color:var(--gold)}
+.realisations h2{color:var(--cream);margin-bottom:4rem;max-width:700px}
+.realisations h2 .italic{color:var(--gold)}
+
+.gallery{
+  display:grid;
+  grid-template-columns:repeat(12,1fr);
+  gap:1rem;
+}
+.gallery-item{
+  position:relative;overflow:hidden;
+  border-radius:2px;
+  aspect-ratio:1;
+  cursor:pointer;
+}
+.gallery-item img{
+  width:100%;height:100%;object-fit:cover;
+  transition:transform 0.6s ease;
+}
+.gallery-item:hover img{transform:scale(1.08)}
+.gallery-item::after{
+  content:"";position:absolute;inset:0;
+  background:linear-gradient(to top, rgba(26,22,19,0.7), transparent 50%);
+  opacity:0;transition:opacity 0.4s;
+}
+.gallery-item:hover::after{opacity:1}
+
+/* Grille asymétrique éditoriale */
+.gallery-item:nth-child(1){grid-column:span 5;aspect-ratio:4/5}
+.gallery-item:nth-child(2){grid-column:span 7;aspect-ratio:7/5}
+.gallery-item:nth-child(3){grid-column:span 4;aspect-ratio:1}
+.gallery-item:nth-child(4){grid-column:span 4;aspect-ratio:1}
+.gallery-item:nth-child(5){grid-column:span 4;aspect-ratio:1}
+
+/* ========== TÉMOIGNAGE ========== */
+.testimonial{
+  padding:8rem 3rem;text-align:center;
+  background:var(--cream);
+}
+.testimonial-quote{
+  font-family:var(--display);font-style:italic;
+  font-size:clamp(1.5rem, 3vw, 2.25rem);
+  line-height:1.3;color:var(--ink);
+  max-width:900px;margin:0 auto 2rem;
+  letter-spacing:-0.01em;
+}
+.testimonial-quote::before,
+.testimonial-quote::after{
+  content:"«";font-size:3rem;color:var(--wine);
+  line-height:0;vertical-align:-0.3em;margin:0 0.5rem;
+}
+.testimonial-quote::after{content:"»"}
+
+.testimonial-author{
+  font-size:0.85rem;letter-spacing:0.15em;text-transform:uppercase;
+  color:var(--ink-soft);
+}
+.testimonial-author strong{color:var(--wine);font-weight:600}
+
+.stars{color:var(--gold);font-size:1.2rem;letter-spacing:0.3rem;margin-bottom:2rem}
+
+/* ========== CONTACT ========== */
+.contact{
+  background:var(--cream-deep);
+  display:grid;grid-template-columns:1fr 1fr;
+  gap:5rem;
+  padding:7rem 3rem;
+}
+.contact-info h2{margin-bottom:2rem}
+.contact-info h2 .italic{color:var(--wine)}
+.contact-info>p{font-size:1.05rem;margin-bottom:2.5rem;max-width:480px}
+
+.contact-details{display:flex;flex-direction:column;gap:1.5rem;margin-top:2rem}
+.contact-item{
+  display:flex;gap:1rem;align-items:flex-start;
+}
+.contact-item-icon{
+  width:40px;height:40px;flex-shrink:0;
+  border:1px solid var(--wine);
+  display:flex;align-items:center;justify-content:center;
+  color:var(--wine);border-radius:50%;
+  font-family:var(--display);font-style:italic;
+}
+.contact-item-text strong{
+  display:block;font-size:0.75rem;letter-spacing:0.15em;
+  text-transform:uppercase;color:var(--ink-soft);
+  font-weight:600;margin-bottom:0.2rem;
+}
+.contact-item-text a,
+.contact-item-text span{
+  font-size:1rem;color:var(--ink);font-weight:500;
+}
+.contact-item-text a:hover{color:var(--wine)}
+
+form{display:flex;flex-direction:column;gap:1.25rem}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+input,textarea,select{
+  width:100%;padding:1rem 1.2rem;
+  font-family:var(--body);font-size:0.95rem;
+  background:var(--cream);color:var(--ink);
+  border:1px solid var(--line);
+  border-radius:2px;
+  transition:border-color 0.2s;
+}
+input:focus,textarea:focus,select:focus{
+  outline:none;border-color:var(--wine);
+}
+textarea{resize:vertical;min-height:140px}
+
+label{
+  font-size:0.75rem;letter-spacing:0.1em;text-transform:uppercase;
+  color:var(--ink-soft);font-weight:600;
+  margin-bottom:-0.5rem;
+}
+
+form .btn{justify-content:center;margin-top:0.5rem}
+
+/* ========== FOOTER ========== */
+footer{
+  background:var(--ink);color:var(--cream);
+  padding:4rem 3rem 2rem;
+}
+.footer-content{
+  display:grid;grid-template-columns:2fr 1fr 1fr;
+  gap:3rem;
+  padding-bottom:3rem;
+  border-bottom:1px solid rgba(245,241,234,0.15);
+}
+.footer-brand{
+  font-family:var(--display);font-size:1.5rem;
+  margin-bottom:1rem;
+}
+.footer-brand .italic{color:var(--gold)}
+.footer-content p{color:rgba(245,241,234,0.7);font-size:0.9rem}
+.footer-col h4{
+  font-family:var(--body);
+  font-size:0.8rem;letter-spacing:0.15em;text-transform:uppercase;
+  color:var(--gold);font-weight:600;margin-bottom:1.25rem;
+}
+.footer-col ul{list-style:none;display:flex;flex-direction:column;gap:0.7rem}
+.footer-col a{
+  color:rgba(245,241,234,0.7);font-size:0.9rem;
+  transition:color 0.2s;
+}
+.footer-col a:hover{color:var(--gold)}
+
+.footer-bottom{
+  padding-top:2rem;
+  display:flex;justify-content:space-between;
+  font-size:0.8rem;color:rgba(245,241,234,0.5);
+}
+
+/* ========== ANIMATIONS ========== */
+@keyframes fadeUp{
+  from{opacity:0;transform:translateY(30px)}
+  to{opacity:1;transform:translateY(0)}
+}
+@keyframes fadeIn{
+  from{opacity:0}
+  to{opacity:1}
+}
+
+/* ========== RESPONSIVE ========== */
+@media (max-width:960px){
+  nav{padding:1rem 1.5rem}
+  .nav-links{
+    display:none;position:absolute;top:100%;left:0;right:0;
+    flex-direction:column;gap:0;
+    background:var(--cream);border-top:1px solid var(--line);
+    padding:1rem 0;
+  }
+  .nav-links.open{display:flex}
+  .nav-links a{padding:1rem 1.5rem;width:100%}
+  .burger{display:flex}
+
+  .hero{
+    grid-template-columns:1fr;padding:7rem 1.5rem 3rem;gap:3rem;
+  }
+  .hero-meta{position:static;margin-top:2rem;gap:2rem}
+
+  section{padding:4rem 1.5rem}
+
+  .about-grid{grid-template-columns:1fr;gap:3rem}
+  .about-image{max-width:400px;margin:0 auto}
+
+  .gallery{grid-template-columns:repeat(2,1fr)}
+  .gallery-item{grid-column:span 1 !important;aspect-ratio:1 !important}
+
+  .contact{grid-template-columns:1fr;gap:3rem;padding:4rem 1.5rem}
+  .form-row{grid-template-columns:1fr}
+
+  .footer-content{grid-template-columns:1fr;gap:2rem}
+  .footer-bottom{flex-direction:column;gap:0.5rem;text-align:center}
+}
+</style>
+</head>
+<body>
+
+<!-- ========== NAV ========== -->
+<nav id="nav">
+  <div class="brand">[NOM_ATELIER]<span class="italic">.</span></div>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="#apropos">Atelier</a></li>
+    <li><a href="#savoir">Savoir-faire</a></li>
+    <li><a href="#realisations">Réalisations</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <button class="burger" onclick="document.getElementById('navLinks').classList.toggle('open')">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- ========== HERO ========== -->
+<header class="hero">
+  <div class="hero-content">
+    <div class="hero-tag">[METIER] · [VILLE]</div>
+    <h1>L'art du <span class="italic">geste juste</span>, transmis depuis [ANNEE].</h1>
+    <p class="hero-desc">
+      [ACCROCHE — 2 phrases. Ex : Dans notre atelier lyonnais, chaque fauteuil raconte une histoire que nous prolongeons avec soin. Restauration, création et pièces d'exception pour les amateurs de belles matières.]
+    </p>
+    <div class="hero-cta">
+      <a href="#contact" class="btn btn-primary">Prendre rendez-vous →</a>
+      <a href="#realisations" class="btn btn-secondary">Voir nos réalisations</a>
+    </div>
+  </div>
+  <div class="hero-visual">
+    <!-- [PHOTO_HERO] — Remplacer par photo atelier en 4:5 -->
+    <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=900&q=80" alt="Atelier [NOM_ATELIER]">
+  </div>
+  <div class="hero-meta">
+    <span><strong>25+</strong>Années d'expérience</span>
+    <span><strong>400</strong>Pièces restaurées</span>
+    <span><strong>4,9</strong>Note Google</span>
+  </div>
+</header>
+
+<!-- ========== À PROPOS ========== -->
+<section class="about" id="apropos">
+  <div class="container about-grid">
+    <div class="about-image">
+      <!-- [PHOTO_ARTISAN] — Portrait ou photo atelier 3:4 -->
+      <img src="https://images.unsplash.com/photo-1565814329452-e1efa11c5b89?w=700&q=80" alt="L'artisan [NOM_ATELIER]">
+    </div>
+    <div class="about-text">
+      <span class="section-label">L'Atelier</span>
+      <h2>Un métier de <span class="italic">patience</span> et de précision.</h2>
+      <p>
+        [TEXTE_ATELIER_1 — Présentation de l'atelier en 3-4 phrases. Histoire, valeurs, ce qui distingue l'artisan.]
+      </p>
+      <p>
+        [TEXTE_ATELIER_2 — Parler du savoir-faire transmis, des matières nobles utilisées, de l'approche sur mesure.]
+      </p>
+      <p class="about-signature">— [PRENOM_ARTISAN]</p>
+    </div>
+  </div>
+</section>
+
+<!-- ========== SAVOIR-FAIRE ========== -->
+<section class="savoir" id="savoir">
+  <div class="container">
+    <span class="section-label">Nos prestations</span>
+    <h2>Quatre <span class="italic">savoir-faire</span>, un même souci du détail.</h2>
+
+    <div class="services-grid">
+      <div class="service">
+        <div class="service-num">01</div>
+        <h3>Restauration</h3>
+        <p>[SERVICE_1 — Ex : Redonner vie à un fauteuil de famille, respecter ses ouvrages d'origine tout en assurant sa solidité pour les décennies à venir.]</p>
+      </div>
+      <div class="service">
+        <div class="service-num">02</div>
+        <h3>Création sur mesure</h3>
+        <p>[SERVICE_2 — Ex : Têtes de lit capitonnées, banquettes, coussins d'assise conçus à partir de vos tissus et de vos dimensions.]</p>
+      </div>
+      <div class="service">
+        <div class="service-num">03</div>
+        <h3>Rideaux &amp; voilages</h3>
+        <p>[SERVICE_3 — Ex : Confection et pose de tentures, doublures et voilages pour habiller chaque pièce avec justesse.]</p>
+      </div>
+      <div class="service">
+        <div class="service-num">04</div>
+        <h3>Conseil en décoration</h3>
+        <p>[SERVICE_4 — Ex : Accompagnement dans le choix des matières, des couleurs et des coordinations. Devis détaillé sous 48h.]</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== RÉALISATIONS ========== -->
+<section class="realisations" id="realisations">
+  <div class="container">
+    <span class="section-label">Portfolio</span>
+    <h2>Quelques <span class="italic">réalisations</span> récentes.</h2>
+
+    <div class="gallery">
+      <!-- [PHOTO_1] → [PHOTO_5] à remplacer par photos réelles -->
+      <div class="gallery-item"><img src="https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=700&q=80" alt="Réalisation 1"></div>
+      <div class="gallery-item"><img src="https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=900&q=80" alt="Réalisation 2"></div>
+      <div class="gallery-item"><img src="https://images.unsplash.com/photo-1618220179428-22790b461013?w=600&q=80" alt="Réalisation 3"></div>
+      <div class="gallery-item"><img src="https://images.unsplash.com/photo-1540574163026-643ea20ade25?w=600&q=80" alt="Réalisation 4"></div>
+      <div class="gallery-item"><img src="https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?w=600&q=80" alt="Réalisation 5"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== TÉMOIGNAGE ========== -->
+<section class="testimonial">
+  <div class="container">
+    <div class="stars">★ ★ ★ ★ ★</div>
+    <p class="testimonial-quote">
+      [TEMOIGNAGE — Ex : Un travail d'une minutie remarquable. Notre canapé Louis-Philippe a retrouvé son éclat d'origine grâce à un savoir-faire qui se fait rare aujourd'hui.]
+    </p>
+    <p class="testimonial-author"><strong>[NOM_CLIENT]</strong> — [VILLE_CLIENT]</p>
+  </div>
+</section>
+
+<!-- ========== CONTACT ========== -->
+<section class="contact" id="contact">
+  <div class="contact-info">
+    <span class="section-label">Contact</span>
+    <h2>Parlons de votre <span class="italic">projet</span>.</h2>
+    <p>
+      Devis gratuit sous 48h. Nous nous déplaçons sur [VILLE] et agglomération pour étudier vos pièces et comprendre vos envies.
+    </p>
+
+    <div class="contact-details">
+      <div class="contact-item">
+        <div class="contact-item-icon">✉</div>
+        <div class="contact-item-text">
+          <strong>Email</strong>
+          <a href="mailto:[EMAIL]">[EMAIL]</a>
+        </div>
+      </div>
+      <div class="contact-item">
+        <div class="contact-item-icon">☎</div>
+        <div class="contact-item-text">
+          <strong>Téléphone</strong>
+          <a href="tel:[TELEPHONE]">[TELEPHONE]</a>
+        </div>
+      </div>
+      <div class="contact-item">
+        <div class="contact-item-icon">⌂</div>
+        <div class="contact-item-text">
+          <strong>Atelier</strong>
+          <span>[ADRESSE]</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ACTION Formspree à remplacer : créer un compte gratuit sur formspree.io -->
+  <form action="https://formspree.io/f/[FORMSPREE_ID]" method="POST">
+    <div class="form-row">
+      <div>
+        <label>Prénom *</label>
+        <input type="text" name="prenom" required>
+      </div>
+      <div>
+        <label>Nom *</label>
+        <input type="text" name="nom" required>
+      </div>
+    </div>
+    <div>
+      <label>Email *</label>
+      <input type="email" name="email" required>
+    </div>
+    <div>
+      <label>Téléphone</label>
+      <input type="tel" name="telephone">
+    </div>
+    <div>
+      <label>Votre projet</label>
+      <select name="projet">
+        <option>Restauration d'un meuble</option>
+        <option>Création sur mesure</option>
+        <option>Rideaux / voilages</option>
+        <option>Conseil en décoration</option>
+        <option>Autre</option>
+      </select>
+    </div>
+    <div>
+      <label>Votre message *</label>
+      <textarea name="message" required placeholder="Décrivez-nous votre projet en quelques lignes..."></textarea>
+    </div>
+    <button type="submit" class="btn btn-primary">Envoyer ma demande →</button>
+  </form>
+</section>
+
+<!-- ========== FOOTER ========== -->
+<footer>
+  <div class="footer-content">
+    <div>
+      <div class="footer-brand">[NOM_ATELIER]<span class="italic">.</span></div>
+      <p>[METIER] à [VILLE] depuis [ANNEE]. Restauration, création sur mesure et conseil en décoration pour particuliers et professionnels.</p>
+    </div>
+    <div class="footer-col">
+      <h4>Navigation</h4>
+      <ul>
+        <li><a href="#apropos">L'atelier</a></li>
+        <li><a href="#savoir">Savoir-faire</a></li>
+        <li><a href="#realisations">Réalisations</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Contact</h4>
+      <ul>
+        <li>[TELEPHONE]</li>
+        <li>[EMAIL]</li>
+        <li>[ADRESSE]</li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© [ANNEE_COURANTE] [NOM_ATELIER]. Tous droits réservés.</span>
+    <span>Mentions légales · Politique de confidentialité</span>
+  </div>
+</footer>
+
+<script>
+// Nav scroll effect
+window.addEventListener('scroll',()=>{
+  document.getElementById('nav').classList.toggle('scrolled',window.scrollY>20);
+});
+
+// Fermer menu mobile au clic
+document.querySelectorAll('.nav-links a').forEach(a=>{
+  a.addEventListener('click',()=>document.getElementById('navLinks').classList.remove('open'));
+});
+</script>
+
+</body>
+</html>
