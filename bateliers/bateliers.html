@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Atelier d'encadrement des Bateliers à Strasbourg. Mathilde Lebeau, encadreur d'art au cœur du Quartier des Bateliers. Encadrement sur mesure, restauration et dorure.">
+<title>Atelier d'encadrement des Bateliers — Strasbourg</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+<style>
+  :root{
+    --ink:#1a2238;
+    --ink-soft:#2c3552;
+    --paper:#fbf7f1;
+    --paper-deep:#f3ecdf;
+    --gold:#a8843d;
+    --gold-deep:#8b6a2b;
+    --line:#d8cdb4;
+    --muted:#6e6b62;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{
+    font-family:'Inter',sans-serif;
+    color:var(--ink);
+    background:var(--paper);
+    line-height:1.6;
+    font-weight:400;
+    -webkit-font-smoothing:antialiased;
+  }
+  h1,h2,h3,h4{
+    font-family:'Cormorant Garamond',serif;
+    font-weight:500;
+    line-height:1.2;
+    color:var(--ink);
+  }
+  h1{font-size:clamp(2.5rem,5.5vw,4.5rem);letter-spacing:-.02em}
+  h2{font-size:clamp(1.9rem,3.5vw,2.8rem);letter-spacing:-.01em}
+  h3{font-size:clamp(1.2rem,2vw,1.5rem)}
+  p{color:var(--ink-soft);font-size:1.0625rem}
+  a{color:var(--ink);text-decoration:none}
+  img{max-width:100%;display:block}
+
+  .wrap{max-width:1180px;margin:0 auto;padding:0 1.5rem}
+
+  header{
+    position:sticky;top:0;background:var(--paper);
+    border-bottom:1px solid var(--line);
+    z-index:50;backdrop-filter:saturate(180%) blur(6px);
+  }
+  .nav{display:flex;align-items:center;justify-content:space-between;padding:1rem 0}
+  .brand{
+    font-family:'Cormorant Garamond',serif;
+    font-size:1.45rem;font-weight:600;letter-spacing:.01em;
+  }
+  .brand small{display:block;font-family:'Inter',sans-serif;font-size:.65rem;font-weight:500;letter-spacing:.18em;color:var(--gold-deep);text-transform:uppercase;margin-top:.15rem}
+  nav ul{display:flex;gap:2rem;list-style:none}
+  nav a{font-size:.92rem;font-weight:500;color:var(--ink-soft);transition:color .2s}
+  nav a:hover{color:var(--gold-deep)}
+  @media(max-width:680px){nav ul{display:none}}
+
+  .hero{position:relative;padding:5.5rem 0 6rem;border-bottom:1px solid var(--line);overflow:hidden}
+  .hero-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:4rem;align-items:center}
+  @media(max-width:880px){.hero-grid{grid-template-columns:1fr;gap:3rem}}
+  .eyebrow{display:inline-block;font-size:.78rem;font-weight:500;letter-spacing:.22em;text-transform:uppercase;color:var(--gold-deep);margin-bottom:1.5rem;border-left:2px solid var(--gold);padding-left:.8rem}
+  .hero h1{margin-bottom:1.5rem}
+  .hero p.lead{font-size:1.15rem;color:var(--ink-soft);margin-bottom:2rem;max-width:36rem}
+  .cta-row{display:flex;gap:1rem;flex-wrap:wrap}
+  .btn{display:inline-flex;align-items:center;gap:.5rem;padding:.95rem 1.5rem;font-size:.95rem;font-weight:500;letter-spacing:.01em;border:1px solid var(--ink);transition:all .2s;cursor:pointer}
+  .btn-primary{background:var(--ink);color:var(--paper)}
+  .btn-primary:hover{background:var(--gold-deep);border-color:var(--gold-deep)}
+  .btn-ghost{background:transparent;color:var(--ink)}
+  .btn-ghost:hover{background:var(--ink);color:var(--paper)}
+  .hero-image{aspect-ratio:4/5;background:var(--paper-deep);border:1px solid var(--line);box-shadow:0 30px 60px -30px rgba(26,34,56,.18);position:relative;overflow:hidden}
+  .hero-image img{width:100%;height:100%;object-fit:cover}
+
+  section{padding:6rem 0;border-bottom:1px solid var(--line)}
+  section h2{margin-bottom:1.5rem}
+  .section-eyebrow{font-size:.78rem;font-weight:500;letter-spacing:.22em;text-transform:uppercase;color:var(--gold-deep);margin-bottom:1rem}
+  .two-col{display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:start}
+  @media(max-width:880px){.two-col{grid-template-columns:1fr;gap:3rem}}
+  .quote{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1.4rem;line-height:1.5;color:var(--ink);margin:2rem 0;padding-left:1.5rem;border-left:2px solid var(--gold)}
+  .stat-row{display:flex;gap:3rem;flex-wrap:wrap;margin-top:2.5rem}
+  .stat-num{font-family:'Cormorant Garamond',serif;font-size:2.4rem;color:var(--gold-deep);font-weight:500;line-height:1}
+  .stat-label{font-size:.85rem;color:var(--muted);text-transform:uppercase;letter-spacing:.12em;margin-top:.4rem}
+
+  .services{display:grid;grid-template-columns:repeat(3,1fr);gap:0;margin-top:3rem;border-top:1px solid var(--line)}
+  @media(max-width:880px){.services{grid-template-columns:1fr}}
+  .service{padding:2.5rem 2rem;border-right:1px solid var(--line);border-bottom:1px solid var(--line)}
+  .service:last-child{border-right:none}
+  @media(max-width:880px){.service{border-right:none}}
+  .service-num{font-family:'Cormorant Garamond',serif;font-size:1.2rem;color:var(--gold-deep);margin-bottom:1rem;letter-spacing:.05em}
+  .service h3{margin-bottom:1rem}
+  .service p{font-size:.95rem;color:var(--ink-soft)}
+
+  .gallery{display:grid;grid-template-columns:repeat(12,1fr);gap:1.25rem;margin-top:3rem}
+  .g-item{position:relative;overflow:hidden;background:var(--paper-deep);border:1px solid var(--line)}
+  .g-item img{width:100%;height:100%;object-fit:cover;transition:transform .6s ease}
+  .g-item:hover img{transform:scale(1.04)}
+  .g1{grid-column:span 7;aspect-ratio:4/3}
+  .g2{grid-column:span 5;aspect-ratio:4/5}
+  .g3{grid-column:span 5;aspect-ratio:1/1}
+  .g4{grid-column:span 4;aspect-ratio:1/1}
+  .g5{grid-column:span 3;aspect-ratio:1/1}
+  @media(max-width:880px){.gallery{grid-template-columns:1fr 1fr;gap:1rem}.g1,.g2,.g3,.g4,.g5{grid-column:span 1;aspect-ratio:1/1}.g1{grid-column:span 2;aspect-ratio:16/10}}
+
+  .testimonial{background:var(--paper-deep);padding:4rem 3rem;text-align:center;border:1px solid var(--line)}
+  .testimonial blockquote{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1.5rem;line-height:1.5;color:var(--ink);max-width:42rem;margin:0 auto 1.5rem}
+  .testimonial cite{font-style:normal;font-size:.85rem;color:var(--muted);letter-spacing:.1em;text-transform:uppercase}
+  .stars{color:var(--gold);letter-spacing:.3rem;margin-bottom:1.5rem;font-size:.95rem}
+
+  .contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:3rem;margin-top:2rem}
+  @media(max-width:880px){.contact-grid{grid-template-columns:1fr}}
+  .info-block{padding:2rem 0;border-top:1px solid var(--line)}
+  .info-block:first-child{border-top:none}
+  .info-label{font-size:.75rem;font-weight:500;letter-spacing:.18em;text-transform:uppercase;color:var(--gold-deep);margin-bottom:.5rem}
+  .info-value{font-family:'Cormorant Garamond',serif;font-size:1.45rem;font-weight:500}
+  .info-value a{color:var(--ink);transition:color .2s}
+  .info-value a:hover{color:var(--gold-deep)}
+  .map{aspect-ratio:4/3;background:var(--paper-deep);border:1px solid var(--line);display:flex;align-items:center;justify-content:center;text-align:center;padding:2rem}
+  .map a{display:block;color:var(--gold-deep);font-weight:500;font-size:.95rem;letter-spacing:.03em;margin-top:1rem}
+  .map svg{width:32px;height:32px;color:var(--gold-deep);margin-bottom:1rem}
+
+  .form{display:grid;gap:1.25rem;margin-top:2rem}
+  .form-row{display:grid;grid-template-columns:1fr 1fr;gap:1.25rem}
+  @media(max-width:680px){.form-row{grid-template-columns:1fr}}
+  label{display:block;font-size:.8rem;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:.4rem}
+  input,textarea,select{width:100%;padding:.75rem 1rem;font-family:inherit;font-size:1rem;background:transparent;border:1px solid var(--line);color:var(--ink)}
+  input:focus,textarea:focus,select:focus{outline:none;border-color:var(--gold-deep)}
+  textarea{min-height:140px;resize:vertical}
+
+  footer{padding:4rem 0 2rem;background:var(--ink);color:var(--paper)}
+  footer p{color:rgba(251,247,241,.65);font-size:.9rem}
+  .footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr;gap:3rem;margin-bottom:3rem;align-items:start}
+  @media(max-width:680px){.footer-grid{grid-template-columns:1fr;gap:2rem}}
+  footer h4{font-size:.8rem;font-weight:500;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);margin-bottom:1.25rem}
+  footer .brand{color:var(--paper)}
+  footer .brand small{color:var(--gold)}
+  footer ul{list-style:none}
+  footer ul li{margin-bottom:.55rem;font-size:.9rem}
+  footer a{color:rgba(251,247,241,.75);transition:color .2s}
+  footer a:hover{color:var(--gold)}
+  .footer-bottom{border-top:1px solid rgba(251,247,241,.12);padding-top:1.5rem;display:flex;justify-content:space-between;flex-wrap:wrap;gap:1rem;font-size:.82rem;color:rgba(251,247,241,.5)}
+
+  .ornament{display:flex;align-items:center;justify-content:center;gap:1rem;margin:2.5rem 0;color:var(--gold)}
+  .ornament .line{flex:1;height:1px;background:var(--line);max-width:120px}
+  .ornament .diamond{width:8px;height:8px;background:var(--gold);transform:rotate(45deg)}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap nav">
+    <a href="#" class="brand">
+      Atelier des Bateliers
+      <small>Encadrement d'art · Strasbourg</small>
+    </a>
+    <nav>
+      <ul>
+        <li><a href="#atelier">L'atelier</a></li>
+        <li><a href="#savoir">Savoir-faire</a></li>
+        <li><a href="#realisations">Réalisations</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="wrap hero-grid">
+    <div>
+      <span class="eyebrow">Quartier des Bateliers · Strasbourg</span>
+      <h1>L'encadrement comme on l'a toujours fait.<br>À la main, à votre rythme.</h1>
+      <p class="lead">Au cœur du quartier historique des Bateliers, je restaure, conçois et monte chaque encadrement avec le souci du geste juste. Du cadre contemporain au cadre doré du XIXe, du dessin de famille à la pièce de galerie.</p>
+      <div class="cta-row">
+        <a href="#contact" class="btn btn-primary">Prendre rendez-vous</a>
+        <a href="#realisations" class="btn btn-ghost">Voir mes réalisations</a>
+      </div>
+    </div>
+    <div class="hero-image">
+      <img alt="Mathilde Lebeau dans son atelier d'encadrement à Strasbourg"
+           src="https://image.pollinations.ai/prompt/editorial_portrait_french_woman_artisan_picture_framer_50s_warm_smile_dark_linen_apron_holding_wooden_moulding_blurred_atelier_background_natural_window_light_warm_skin_tones_strasbourg_photorealistic?width=900&height=1200&nologo=true&seed=124">
+    </div>
+  </div>
+</section>
+
+<section id="atelier">
+  <div class="wrap two-col">
+    <div>
+      <div class="section-eyebrow">L'atelier</div>
+      <h2>Un métier qui demande du temps. Et qui le rend bien.</h2>
+    </div>
+    <div>
+      <p>Je suis Mathilde Lebeau. J'ai ouvert l'Atelier d'encadrement des Bateliers rue Jacques Peirotes après plusieurs années passées chez des encadreurs strasbourgeois et alsaciens à apprendre le métier. Aujourd'hui, je travaille seule, dans un atelier où chaque commande est traitée comme une rencontre — entre vous, votre œuvre, et le cadre qu'elle mérite.</p>
+      <div class="quote">« Un bon encadrement ne se voit pas tout de suite. Il se ressent. »</div>
+      <p>Je m'occupe de tout, du choix de la moulure jusqu'à l'accrochage si vous le souhaitez. Et si la pièce demande une restauration, du recollage à la reprise de dorure, je prends le temps de la regarder avant d'engager quoi que ce soit.</p>
+      <div class="stat-row">
+        <div class="stat"><div class="stat-num">+12</div><div class="stat-label">Années de métier</div></div>
+        <div class="stat"><div class="stat-num">800+</div><div class="stat-label">Œuvres encadrées</div></div>
+        <div class="stat"><div class="stat-num">100%</div><div class="stat-label">Sur mesure</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="savoir" style="background:var(--paper-deep)">
+  <div class="wrap">
+    <div class="section-eyebrow">Savoir-faire</div>
+    <h2>Quatre métiers dans un même atelier.</h2>
+    <p style="max-width:46rem;margin-top:1rem">De la commande la plus simple — un dessin d'enfant à protéger — à la restauration d'un cadre Empire hérité de famille. Chaque pièce est traitée avec le même soin.</p>
+
+    <div class="services">
+      <div class="service"><div class="service-num">01</div><h3>Encadrement sur mesure</h3><p>Choix de moulures bois ou doré, passe-partout coupé à la main, vitre claire ou anti-reflet. Conseil sur le format et la marie-louise pour chaque œuvre.</p></div>
+      <div class="service"><div class="service-num">02</div><h3>Restauration de cadres</h3><p>Cadres dorés du XIXe, baguettes Napoléon III, encadrements Art Déco. Recollage, reprise de dorure, retouche de patines, remise en état complète.</p></div>
+      <div class="service"><div class="service-num">03</div><h3>Dorure à la feuille</h3><p>Reprise des dorures usées sur cadres anciens, retouches à la feuille d'or 22 carats, reproduction de patines pour s'accorder à la pièce d'origine.</p></div>
+      <div class="service"><div class="service-num">04</div><h3>Conseil & accrochage</h3><p>Choix du cadre en harmonie avec votre intérieur. Déplacement sur Strasbourg et environs pour les pièces lourdes ou les accrochages complexes.</p></div>
+      <div class="service"><div class="service-num">05</div><h3>Montage muséal</h3><p>Pour les œuvres anciennes ou de valeur : verres anti-UV, montages flottants sur charnières japonaises, isolation contre l'humidité.</p></div>
+      <div class="service"><div class="service-num">06</div><h3>Petits et grands formats</h3><p>Du miniature au format galerie. Particuliers, collectionneurs, photographes, galeries strasbourgeoises — tous accompagnés à la même hauteur.</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="realisations">
+  <div class="wrap">
+    <div class="section-eyebrow">Réalisations</div>
+    <h2>Quelques pièces récentes passées à l'atelier.</h2>
+    <div class="gallery">
+      <div class="g-item g1"><img alt="Encadrement d'une aquarelle dans l'atelier" src="https://image.pollinations.ai/prompt/custom_framed_watercolour_artwork_artisan_workbench_picture_framing_atelier_warm_natural_light_strasbourg_photorealistic_no_people?width=1200&height=900&nologo=true&seed=201"></div>
+      <div class="g-item g2"><img alt="Détail d'un cadre doré restauré" src="https://image.pollinations.ai/prompt/macro_close_up_antique_gilded_baroque_picture_frame_corner_gold_leaf_patina_hand_carved_acanthus_warm_directional_light_dark_blurred_background_photorealistic?width=900&height=1100&nologo=true&seed=202"></div>
+      <div class="g-item g3"><img alt="Cadres en attente dans l'atelier des Bateliers" src="https://image.pollinations.ai/prompt/multiple_picture_frames_hanging_on_wall_strasbourg_atelier_warm_lighting_textured_wall_antique_tools_photorealistic_no_people?width=1000&height=1000&nologo=true&seed=203"></div>
+      <div class="g-item g4"><img alt="Outils d'encadreur sur l'établi" src="https://image.pollinations.ai/prompt/flat_lay_artisan_picture_framing_tools_workbench_brass_ruler_pencil_mat_cutter_wood_samples_warm_natural_daylight_photorealistic?width=900&height=900&nologo=true&seed=204"></div>
+      <div class="g-item g5"><img alt="Restauration d'un cadre ancien" src="https://image.pollinations.ai/prompt/artisan_hands_no_face_carefully_retouching_gold_leaf_antique_empire_picture_frame_fine_brush_warm_tungsten_workshop_lighting_shallow_depth_field_photorealistic?width=900&height=900&nologo=true&seed=205"></div>
+    </div>
+
+    <div class="ornament"><div class="line"></div><div class="diamond"></div><div class="line"></div></div>
+
+    <div class="testimonial">
+      <div class="stars">★ ★ ★ ★ ★</div>
+      <blockquote>« Mathilde a restauré un cadre Empire de ma grand-mère que j'avais cru perdu. Elle m'a expliqué chaque geste avant de le faire. Le résultat est exactement ce que j'espérais, sans rien d'ostentatoire. »</blockquote>
+      <cite>— Catherine F., Strasbourg-Robertsau</cite>
+    </div>
+  </div>
+</section>
+
+<section id="contact" style="background:var(--paper-deep)">
+  <div class="wrap">
+    <div class="section-eyebrow">Contact</div>
+    <h2>Parlons de votre pièce.</h2>
+    <p style="max-width:46rem;margin-top:1rem">Un dessin, une aquarelle, une photographie de famille, un cadre à restaurer — passez à l'atelier, ou envoyez-moi une photo. Premier devis gratuit sous 48 heures.</p>
+    <div class="contact-grid">
+      <div>
+        <div class="info-block"><div class="info-label">Adresse</div><div class="info-value">11 rue Jacques Peirotes<br>67000 Strasbourg</div></div>
+        <div class="info-block"><div class="info-label">Téléphone</div><div class="info-value"><a href="tel:0388255339">03 88 25 53 39</a></div></div>
+        <div class="info-block"><div class="info-label">Email</div><div class="info-value"><a href="mailto:encadrementbateliers@gmail.com">encadrementbateliers@gmail.com</a></div></div>
+        <div class="info-block"><div class="info-label">Horaires</div><div class="info-value" style="font-size:1.05rem;font-family:Inter,sans-serif;font-weight:400;color:var(--ink-soft);line-height:1.7">Mardi – Vendredi : 10h – 12h30 / 14h – 18h30<br>Samedi : 10h – 17h<br>Sur rendez-vous le lundi</div></div>
+      </div>
+      <div>
+        <div class="map"><div>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 21s-7-7.5-7-12a7 7 0 1 1 14 0c0 4.5-7 12-7 12z"/><circle cx="12" cy="9" r="2.5"/></svg>
+          <strong>Quartier des Bateliers, Strasbourg</strong>
+          <a href="https://maps.google.com/?q=11+rue+Jacques+Peirotes+67000+Strasbourg" target="_blank" rel="noopener">Ouvrir dans Google Maps →</a>
+        </div></div>
+        <form class="form" onsubmit="event.preventDefault();alert('Merci, je reviens vers vous sous 48 h.');this.reset();">
+          <div class="form-row"><div><label>Prénom</label><input type="text" required></div><div><label>Nom</label><input type="text" required></div></div>
+          <div class="form-row"><div><label>Email</label><input type="email" required></div><div><label>Téléphone</label><input type="tel"></div></div>
+          <div><label>Votre projet</label><select><option>Encadrement sur mesure</option><option>Restauration de cadre</option><option>Dorure à la feuille</option><option>Conseil et accrochage</option><option>Autre</option></select></div>
+          <div><label>Message</label><textarea placeholder="Décrivez votre œuvre, ses dimensions, ce que vous imaginez…"></textarea></div>
+          <button type="submit" class="btn btn-primary">Envoyer ma demande</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="footer-grid">
+      <div>
+        <div class="brand">Atelier des Bateliers<small>Encadrement d'art · Strasbourg</small></div>
+        <p style="margin-top:1.5rem;max-width:24rem">Au cœur du quartier historique des Bateliers, atelier d'encadrement, restauration et dorure pour particuliers, galeries et collectionneurs.</p>
+      </div>
+      <div><h4>Navigation</h4><ul><li><a href="#atelier">L'atelier</a></li><li><a href="#savoir">Savoir-faire</a></li><li><a href="#realisations">Réalisations</a></li><li><a href="#contact">Contact</a></li></ul></div>
+      <div><h4>Contact</h4><ul><li>11 rue Jacques Peirotes</li><li>67000 Strasbourg</li><li><a href="tel:0388255339">03 88 25 53 39</a></li><li><a href="mailto:encadrementbateliers@gmail.com">encadrementbateliers@gmail.com</a></li></ul></div>
+    </div>
+    <div class="footer-bottom"><span>© 2026 Atelier d'encadrement des Bateliers — Mathilde Lebeau</span><span>Maquette préparée par Vitrine Artisan Pro</span></div>
+  </div>
+</footer>
+
+</body>
+</html>
